@@ -27,24 +27,10 @@
             <h3 class="h3">自分の興味分野を3つ以上選択してください</h3>
             <div class="container">
                 <div>
-                    <input id='test1' class="chk" type="checkbox" checked>
-                    <label for="test1">データサイエンス</label>
-                    <input id='test2' class="chk" type="checkbox" checked>
-                    <label for="test2">機械学習</label>
-                    <input id='test3' class="chk" type="checkbox" checked>
-                    <label for="test3">test3</label>
-                    <input id='test4' class="chk" type="checkbox" checked>
-                    <label for="test4">test4</label>
-                    <input id='test5' class="chk" type="checkbox" checked>
-                    <label for="test5">IoT</label>
-                    <input id='test6' class="chk" type="checkbox" checked>
-                    <label for="test6">ゲーム</label>
-                    <input id='test7' class="chk" type="checkbox" checked>
-                    <label for="test7">test6</label>
-                    <input id='test8' class="chk" type="checkbox" checked>
-                    <label for="test8">あああああ</label>
-                    <input id='test9' class="chk" type="checkbox" checked>
-                    <label for="test9">どのくらいあるのか教えてください</label>
+                    {% for category in categorys %}
+                    <input id='{{ category }}' class="chk" type="checkbox" checked>
+                    <label for='{{ category }}'>{{ category }}</label>
+                    {% endfor %}
                 </div>
                 <p>※ 注意書きをしたいので教えて欲しいです。</p>
                 <div>

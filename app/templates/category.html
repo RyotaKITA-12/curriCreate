@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="/static/index.css" rel="stylesheet" type="text/css">
+        <link href="/static/reset.css" rel="stylesheet" type="text/css">
+        <title lang="ja">test</title>
+    </head>
+    <body>
+        <header>
+            <div class="header_logo">
+                <img src="/static/images/logo.png" alt="" style="height: 65px;">
+            </div>
+            <nav>
+                <div class="burger"></div>
+                <div class="menu">サンプル</div>
+            </nav>
+        </header>
+        <main>
+            <h3 class="h3">自分の興味分野を3つ以上選択してください</h3>
+            <div class="container" style="margin-left: 5vw;">
+                <form method="post">
+                    <div class="list_chk" style="overflow-y: scroll; height: 57vh; width: 90vw; text-align: center;">
+                            {% for category in categorys %}
+                            <input id="{{ category }}" class="chk" name="elem" type="checkbox" value="{{ category }}">
+                            <label for="{{ category }}">{{ category }}</label>
+                            {% endfor %}
+                    </div>
+                    <div>
+                        <button onclick="location.href='result'" formaction="/result" class="submit_button">履修結果 ▶︎▶︎</button>
+                        <button onclick="location.href='selects'" formaction="/selects" type="submit" id='btn1' class="submit_button">候補一覧 ▶︎</button>
+                        <p class="text_p"></p>
+                    </div>
+                </form>
+            </div>
+        </main>
+        <footer class="footer">
+            <h4>{{ total }}<span>/</span>124</h4>
+        </footer>
+        <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+        <script src="/static/index.js" type="text/javascript"></script>
+    </body>
+</html>

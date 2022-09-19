@@ -31,3 +31,24 @@ $("#btn1").click(function () {
         $("#span3").text(lesson);
         });
     });
+
+// チェックボックスを含む td 要素をクリックしたときに、チェックボックスをクリック
+$('td:has(input[type=checkbox])').on('click', function(e){
+    $(this).find('input[type=checkbox]').click();
+});
+// バブリングを防止
+$('td input[type=checkbox]').on('click', function(e){
+    e.stopPropagation();
+});
+
+// detaidl
+$(".detail").click(function(){
+    $(".detail").toggleClass("is-active")
+    $(".detail_menu").toggleClass("is-active");
+});
+$(".batsu").click(function(){
+    $(".detail").toggleClass("is-active")
+    $(".detail_menu").toggleClass("is-active");
+});
+
+

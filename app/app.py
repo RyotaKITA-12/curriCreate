@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
@@ -6,16 +6,12 @@ app = Flask(__name__)
 @app.route("/")
 @app.route("/index")
 def index():
-    name = request.args.get("name")
-    animals = ["dog", "cat"]
-    return render_template("index.html", name=name, animals=animals)
+    return render_template("index.html")
 
 
-@app.route("/index", methods=["post"])
-def post():
-    name = request.form["name"]
-    animals = ["dog", "cat"]
-    return render_template("index.html", name=name, animals=animals)
+@app.route("/list")
+def list():
+    return render_template("list.html")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,146 @@
+/* ヘッダー */
+header{
+    height: 80px;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    padding: 0 40px;
+}
+.header_logo img{
+    height: 24px;
+}
+header nav{
+    display: flex;
+    align-items: center;
+    margin: 0 0 0 auto;
+}
+a{
+    color: #4c2480;
+    text-decoration: none;
+    font: 1em/1 'Noto Sans', sans-serif;
+    padding: 0-10;
+}
+/* バーガー */
+.burger{
+    width: 40px;
+    height: 40px;
+    background-image: url(/static/images/burger.svg);
+    background-size: 35px;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0 0 0 60px;
+    cursor: pointer;
+    border-radius: 4px;
+    z-index: 2;
+}
+.burger.is-active{
+    background-image: url(/static/images/close.svg);
+}
+/* メニュー */
+.menu{
+    color: #fff;
+    font: 1em/1 'Noto Sans', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: #97c83e;
+    position: fixed;
+    top:0;
+    left:0;
+    z-index: 1;
+    display: none;
+}
+.menu.is-active{
+    display: flex;
+}
+/* メイン */
+main{
+    min-height: 600px;
+}
+
+.h3 {
+    padding: 30px 60px 15px;
+    color: #4c2480;
+    font: 1.4em/1 'Noto Sans', sans-serif;
+}
+
+/* -------------チェックボックス---------------- */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+.container {
+    position: absolute;
+    margin: 0px 60px;
+    font: 1.4em/1 'Noto Sans', sans-serif;
+}
+input {
+    position: absolute;
+    left: -9999px;
+}
+label {
+    display: inline-block;
+    position: relative;
+    margin: 10px;
+    padding: 5px 20px;
+    font-size: 18px;
+    border: 3px solid #4c2480;
+    color:#fff;
+    background-color: #4c2480;
+    border-radius: 5px;
+    white-space: nowrap;
+    /* cursor: pointer; */
+    user-select: none;
+    transition: background-color .2s, box-shadow .2s;
+}
+label::before {
+    /* content: ''; */
+    display: block;
+    position: absolute;
+    top: 10px;
+    bottom: 10px;
+    left: 10px;
+    width: 32px;
+    border: 3px solid #4c2480;
+    border-radius: 50px;
+    transition: background-color .2s;
+}
+input:checked + label {
+    background-color: #fff;
+    color: #4c2480;
+}
+button{
+    float: right;
+    justify-content: flex-end;
+    margin: 40px 20px;
+    padding: 15px 35px;
+    color: #fff;
+    background-color: #4c2480;
+    font-size: 20px;
+    border-radius: 10px;
+}
+.container p{
+    color: #4c2480;
+    font-size: 15px;
+}
+
+
+/* -------------フッター----------- */
+.wrapper{
+    min-height: 100vh;
+    position: relative;/*←相対位置*/
+    padding-bottom: 120px;/*←footerの高さ*/
+    box-sizing: border-box;/*←全て含めてmin-height:100vhに*/
+}
+
+footer{
+    width: 100%;
+    background-color: #97c83e;
+    color: #fff;
+    text-align: center;
+    padding: 30px 0;
+
+position: absolute;/*←絶対位置*/
+    bottom: 0; /*下に固定*/
+}

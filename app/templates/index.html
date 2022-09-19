@@ -1,16 +1,62 @@
 <!DOCTYPE html>
 <html>
     <head>
-            <title>{{ name }}</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="/static/index.css" rel="stylesheet" type="text/css">
+        <link href="/static/reset.css" rel="stylesheet" type="text/css">
+        <title lang="ja">test</title>
     </head>
     <body>
-    <h1>Webアプリ初心者のFlaskチュートリアル</h1>
-    <form action="/index" method="POST">
-        <input type="text" name="name" placeholder="Enter name">
-        <input type="submit" value="Submit">
-    </form>
-    {% for animal in animals %}
-    <p>{{ animal }}</p>
-    {% endfor %}
+        <header>
+            <div class="header_logo">
+                <img src="/static/images/test.png" alt="">
+            </div>
+            <nav>
+                <ul>
+                    <li>
+                        <a href="index">Topに戻る</a>
+                    </li>
+                </ul>
+                <div class="burger"></div>
+                <div class="menu">サンプル</div>
+            </nav>
+        </header>
+        <main>
+            <h3 class="h3">自分の興味分野を3つ以上選択してください</h3>
+            <div class="container">
+                <div>
+                    <input id='test1' class="chk" type="checkbox" checked>
+                    <label for="test1">データサイエンス</label>
+                    <input id='test2' class="chk" type="checkbox" checked>
+                    <label for="test2">機械学習</label>
+                    <input id='test3' class="chk" type="checkbox" checked>
+                    <label for="test3">test3</label>
+                    <input id='test4' class="chk" type="checkbox" checked>
+                    <label for="test4">test4</label>
+                    <input id='test5' class="chk" type="checkbox" checked>
+                    <label for="test5">IoT</label>
+                    <input id='test6' class="chk" type="checkbox" checked>
+                    <label for="test6">ゲーム</label>
+                    <input id='test7' class="chk" type="checkbox" checked>
+                    <label for="test7">test6</label>
+                    <input id='test8' class="chk" type="checkbox" checked>
+                    <label for="test8">あああああ</label>
+                    <input id='test9' class="chk" type="checkbox" checked>
+                    <label for="test9">どのくらいあるのか教えてください</label>
+                </div>
+                <p>※ 注意書きをしたいので教えて欲しいです。</p>
+                <div>
+                    <button onclick="location.href='list'" type="submit" id='btn1' class="submit_button">履修を作成 ▶︎▶︎</button>
+                    <p class="text_p"></p>
+                </div>
+            </div>
+        </main>
+        <footer>
+            <p>@2022 kita taki tamaru takahashi</p>
+        </footer>
+        <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+        <script src="/static/index.js" type="text/javascript"></script>
     </body>
 </html>

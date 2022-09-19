@@ -26,17 +26,19 @@
         <main>
             <h3 class="h3">自分の興味分野を3つ以上選択してください</h3>
             <div class="container">
-                <div>
-                    {% for category in categorys %}
-                    <input id='{{ category }}' class="chk" type="checkbox" checked>
-                    <label for='{{ category }}'>{{ category }}</label>
-                    {% endfor %}
-                </div>
-                <p>※ 注意書きをしたいので教えて欲しいです。</p>
-                <div>
-                    <button onclick="location.href='list'" type="submit" id='btn1' class="submit_button">履修を作成 ▶︎▶︎</button>
-                    <p class="text_p"></p>
-                </div>
+                <form action="/selects" method="post">
+                    <div>
+                            {% for category in categorys %}
+                            <input id="{{ category }}" class="chk" name="elem" type="checkbox" value="{{ category }}">
+                            <label for="{{ category }}">{{ category }}</label>
+                            {% endfor %}
+                    </div>
+                    <p>※ 注意書きをしたいので教えて欲しいです。</p>
+                    <div>
+                        <button onclick="location.href='selects'" type="submit" id='btn1' class="submit_button">履修を作成 ▶︎▶︎</button>
+                        <p class="text_p"></p>
+                    </div>
+                </form>
             </div>
         </main>
         <footer>

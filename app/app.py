@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
@@ -12,9 +12,11 @@ def index():
     return render_template("index.html", categorys=categorys)
 
 
-@app.route("/list")
-def list():
-    return render_template("list.html")
+@app.route("/selects", methods=["POST"])
+def selects():
+    select_categorys = request.form.getlist("elem")
+    print(select_categorys)
+    return render_template("select.html", selects=select_categorys)
 
 
 if __name__ == "__main__":

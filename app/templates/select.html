@@ -28,7 +28,9 @@
             <div class="container">
                 <div>
                     <div class="box1">
-                        <p><span id="span3"></span></p>
+                        {% for select in selects %}
+                        <p><span id="span3">{{ select }}</span></p>
+                        {% endfor %}
                     </div>
                 </div>
             </div>

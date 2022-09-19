@@ -1,3 +1,7 @@
+body {
+    font-family: "Open Sans", sans-serif;
+    line-height: 1.25;
+}
 /* ヘッダー */
 header{
     height: 80px;
@@ -18,13 +22,13 @@ a{
     color: #4c2480;
     text-decoration: none;
     font: 1em/1 'Noto Sans', sans-serif;
-    padding: 0-10;
+    padding: 0px 10px;
 }
 /* バーガー */
 .burger{
     width: 40px;
     height: 40px;
-    background-image: url(/static/images/burger.svg);
+    background-image: url(img/burger.svg);
     background-size: 35px;
     background-position: center;
     background-repeat: no-repeat;
@@ -34,7 +38,7 @@ a{
     z-index: 2;
 }
 .burger.is-active{
-    background-image: url(/static/images/close.svg);
+    background-image: url(img/close.svg);
 }
 /* メニュー */
 .menu{
@@ -71,11 +75,13 @@ main{
     box-sizing: border-box;
 }
 .container {
-    position: absolute;
-    margin: 0px 60px;
+    /* position: absolute; */
     font: 1.4em/1 'Noto Sans', sans-serif;
 }
-input {
+.list_chk{
+    padding: 0 50px;;
+}
+.list_chk input {
     position: absolute;
     left: -9999px;
 }
@@ -86,8 +92,8 @@ label {
     padding: 5px 20px;
     font-size: 18px;
     border: 3px solid #4c2480;
-    background-color: #fff;
     color: #4c2480;
+    background-color: #fff;
     border-radius: 5px;
     white-space: nowrap;
     /* cursor: pointer; */
@@ -123,8 +129,121 @@ button{
 .container p{
     color: #4c2480;
     font-size: 15px;
+    padding-top: 15px;
 }
 
+/* ==========list.html============ */
+/* 興味選択 */
+/* list表示 */
+.list {
+    display: inline-block;
+    position: relative;
+    margin: 10px;
+    padding: 5px 20px;
+    font-size: 18px;
+    border: 3px solid #4c2480;
+    color:#fff;
+    background-color: #4c2480;
+    border-radius: 5px;
+    white-space: nowrap;
+    user-select: none;
+    transition: background-color .2s, box-shadow .2s;
+}
+.list_count{
+    padding: 10px 20px;
+    margin: 0px 60px;
+    background-color: #D9D9D9;
+}
+/* table */
+table {
+    border-collapse: collapse;
+    margin: 0 auto;
+    padding: 0;
+    width: 80%;
+    color: #000;
+}
+table tr {
+    padding: .35em;
+    border-bottom: 1px solid #bbb;
+}
+table thead{
+    border-bottom: 3px solid #4c2480;
+}
+table tr:last-child{
+    border-bottom: none
+}
+table th, table td {
+    padding: 1em 10px 1em 1em;
+    border-right: 1px solid #bbb;
+}
+table th:last-child, table td:last-child{
+    border: none;
+}
+tbody th {
+    color: #4c2480;
+}
+.txt{
+    text-align: center;
+    font-size: .85em;
+}
+.price{
+    text-align: center;
+}
+@media screen and (max-width: 80%) {
+    table {
+        border: 0;
+        width:100%
+    }
+    table th{
+        display: block;
+        border-right: none;
+        border-bottom: 3px solid #4c2480;
+        padding-bottom: .6em;
+        margin-bottom: .6em;
+    }
+    table thead {
+        border: none;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+        text-align: center;
+    }
+    table tr {
+        display: block;
+        margin-bottom: 2em;
+    }
+    table td {
+        border-bottom: 1px solid #bbb;
+        display: block;
+        font-size: .8em;
+        text-align: center;
+        position: relative;
+        padding: .625em .625em .625em 4em;
+        border-right: none;
+    }
+    table td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        position: absolute;
+        left: 10px;
+    }
+    table td:last-child {
+        border-bottom: 0;
+    }
+}
+.pointer{
+    cursor: pointer;
+}
+/* チェックボックスデザイン */
+.pointer input{
+    accent-color:#4c2480;
+    transform: scale(1.5);
+    margin: 0 5px 0 0;
+}
 
 /* -------------フッター----------- */
 .wrapper{

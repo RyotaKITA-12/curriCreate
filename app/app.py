@@ -1,9 +1,9 @@
+from datetime import timedelta
 import os
 from os.path import join, dirname
 
 from dotenv import load_dotenv
-from flask import Flask, render_template, request
-from flask_sqlalchemy import SQLAlchemy
+from flask import Flask, render_template, request, session
 import pandas as pd
 import psycopg2
 
@@ -31,55 +31,70 @@ def get_path_db():
 
 
 app = Flask(__name__)
+app.permanent_session_lifetime = timedelta(minutes=10)
+
 path, config = get_path_db()
 app.config['SQLALCHEMY_DATABASE_URL'] = path
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 
-db = SQLAlchemy(app)
-
 connection = psycopg2.connect(**config)
+HEADER_CURRICULUM = ["entrance_year", "course_id", "course_category",
+                     "course_name", "course_year", "credit_required",
+                     "credit_elective", "course_summary", "course_keyword"]
 
-df = pd.read_sql(sql='SELECT * FROM curriculums;', con=connection)
-header = ["entrance_year", "course_id", "course_category", "course_name",
-          "course_year", "credit_required", "credit_elective",
-          "course_summary", "course_keyword"]
-record = df.values.tolist()
-
-
-class Keywords(db.Model):
-    __tablename__ = 'keywords'
-    curriculum_id = db.Column(db.Integer, primary_key=True)
-    course_keyword = db.Column(db.String)
-
-
-class Curriculums(db.Model):
-    __tablename__ = 'curriculums'
-    curriculum_id = db.Column(db.Integer, primary_key=True)
-    entrance_year = db.Column(db.Integer)
-    course_id = db.Column(db.Integer)
-    course_category = db.Column(db.String)
-    course_name = db.Column(db.String)
-    course_year = db.Column(db.String)
-    credit_required = db.Column(db.Integer)
-    credit_elective = db.Column(db.Integer)
-    course_summary = db.Column(db.String)
-    course_keyword = db.Column(db.String)
+ENTRANCE_YEAR = "2020"
+app.secret_key = 'selects'
 
 
 @app.route("/")
 @app.route("/index")
 def index():
-    categorys = ["データサイエンス", "機械学習", "ゲーム", "IoT",
-                 "Web", "深層学習", "強化学習", "数学", "スクレイピング",
-                 "倫理", "データベース", "音声認識", "画像認識", "自然言語処理"]
-    return render_template("index.html", categorys=categorys, test=record)
+    if "selects" not in session:
+        session["selects"] = []
+    df_category = pd.read_sql(
+        sql='SELECT course_keyword FROM keywords;',
+        con=connection
+    )
+    record_category = set([elem[0] for elem in df_category.values.tolist()])
+    return render_template("index.html",
+                           categorys=record_category)
+
+
+@app.route("/", methods=["POST"])
+@app.route("/index", methods=["POST"])
+def post_index():
+    select_id = request.form.getlist("elem")
+    session["selects"].extend(select_id)
+    df_category = pd.read_sql(
+        sql='SELECT course_keyword FROM keywords;',
+        con=connection
+    )
+    record_category = set([elem[0] for elem in df_category.values.tolist()])
+    return render_template("index.html",
+                           categorys=record_category,
+                           test=session["selects"])
 
 
 @app.route("/selects", methods=["POST"])
 def selects():
     select_categorys = request.form.getlist("elem")
-    return render_template("select.html", selects=select_categorys)
+    sql = "SELECT * FROM curriculums"
+    sql += " INNER JOIN keywords"
+    sql += " ON curriculums.curriculum_id = keywords.course_id"
+    sql += f" WHERE curriculums.entrance_year = '{ENTRANCE_YEAR}' AND"
+    for elem in select_categorys:
+        sql += f" keywords.course_keyword = '{elem}' OR"
+    sql = sql[:-3]
+    df_curriculum = pd.read_sql(
+        sql=sql,
+        con=connection
+    )
+    record = df_curriculum.values.tolist()
+    return render_template("select.html",
+                           selects=select_categorys,
+                           record=record,
+                           test=session["selects"])
 
 
 if __name__ == "__main__":

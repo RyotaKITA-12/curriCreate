@@ -11,7 +11,7 @@
     <body>
         <header>
             <div class="header_logo">
-                <img src="/static/images/test.png" alt="">
+                <img src="/static/images/logo.png" alt="" style="height: 65px;">
             </div>
             <nav>
                 <ul>
@@ -24,10 +24,11 @@
             </nav>
         </header>
         <main>
+            {{ test }}
             <h3 class="h3">自分の興味分野を3つ以上選択してください</h3>
             <div class="container">
                 <form action="/selects" method="post">
-                    <div>
+                    <div class="list_chk" style="overflow-y: scroll; height: 60vh; width: 90vw; text-align: center;">
                             {% for category in categorys %}
                             <input id="{{ category }}" class="chk" name="elem" type="checkbox" value="{{ category }}">
                             <label for="{{ category }}">{{ category }}</label>

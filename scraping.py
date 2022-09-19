@@ -17,8 +17,8 @@ options = Options()
 driver = webdriver.Chrome("../chromedriver",options=options)
 class_list = []
 
-USERID = 's2022022'
-PASSWORD = '_7j_ZwM8'
+USERID = 'id'
+PASSWORD = 'pass'
 
 # driver = webdriver.Chrome('/Users/hyugataki/Univ/B3/dbd/scraping/chromedriver')
 error_flg = False

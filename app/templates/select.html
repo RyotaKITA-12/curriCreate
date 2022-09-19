@@ -74,7 +74,52 @@
                                         <td data-label="開講学科" class="txt">全学</td>
                                     {% endif %}
                                     <td data-label="興味選択" class="txt">{{ elem[9] }}</td>
-                                    <td data-label="詳細" class="txt">詳細</td>
+                                    <td data-label="詳細" class="txt">
+                                        <div class="detail"></div>
+                                        <div class="detail_menu">
+                                            <div>
+                                                <div class="left">
+                                                    <table>
+                                                        <tr>
+                                                            <td>必/選</td>
+                                                            {% if elem[6] != 0 %}
+                                                                <td>必修</td>
+                                                                {% else %}
+                                                                <td>選択</td>
+                                                            {% endif %}
+                                                        </tr>
+                                                        <tr>
+                                                            <td>対象学年</td>
+                                                            <td>{{ elem[5] }}年以上</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>単位数</td>
+                                                            {% if elem[6] != 0 %}
+                                                                <td>{{ elem[6] }}</td>
+                                                                {% else %}
+                                                                <td>{{ elem[7] }}</td>
+                                                            {% endif %}
+                                                        </tr>
+                                                        <tr>
+                                                            <td>開講学科</td>
+                                                            {% if elem[3] == "学科" %}
+                                                                <td>DS</td>
+                                                                {% else %}
+                                                                <td>全学</td>
+                                                            {% endif %}
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                                <div class="right">
+                                                    <h5>{{ elem[4] }}</h5>
+                                                    <p>
+                                                        {{ elem[8] }}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <span class="batsu"><img src="/static/images/close.svg" alt=""></span>
+                                        </div>
+                                    </td>
                                 </tr>
                             {% endfor %}
                         </tbody>

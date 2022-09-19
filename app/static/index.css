@@ -28,7 +28,7 @@ a{
 .burger{
     width: 40px;
     height: 40px;
-    background-image: url(img/burger.svg);
+    background-image: url(images/burger.svg);
     background-size: 35px;
     background-position: center;
     background-repeat: no-repeat;
@@ -38,7 +38,7 @@ a{
     z-index: 2;
 }
 .burger.is-active{
-    background-image: url(img/close.svg);
+    background-image: url(images/close.svg);
 }
 /* メニュー */
 .menu{
@@ -244,6 +244,79 @@ tbody th {
     transform: scale(1.5);
     margin: 0 5px 0 0;
 }
+
+/* 詳細のところ */
+.txt img{
+    background-color: #4c2480;
+    width: 25px;
+    height: 25px;
+}
+.detail{
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+    background-image: url(images/detail.svg);
+    background-color: #4c2480;
+    background-size: 25px;
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    border-radius: 4px;
+    z-index: 2;
+}
+.detail.is-active{
+    background-image: url(images/close.svg);
+}
+
+/* 詳細 */
+.detail_menu{
+    color: #fff;
+    width: 80vw;
+    height: 80vh;
+    background-color: #4c2480;
+    position: fixed;
+    top:10%;
+    left:10%;
+    z-index: 1;
+    padding: 15px;
+    display: none;
+}
+.detail_menu.is-active{
+    display: flex;
+}
+.left{
+    padding: 10px;
+    float:left;
+    width: 25%
+}
+.left table{
+    color: #fff;
+}
+.right{
+    padding: 20px;
+    margin: 15px 15px 15px 0px;
+    float:right;
+    width: 70%;
+    border: 1px solid #fff;
+}
+.right h5{
+    font-size: 20px;
+    font-weight: bold;
+    text-align: left;
+    padding: 0px 10px;
+}
+.right p{
+    text-align: left;
+    font-size: 12.5px;
+    margin: 10px;
+}
+.batsu{
+    width: 50px;
+    height: 50px;
+}
+
 
 /* -------------フッター----------- */
 .wrapper{

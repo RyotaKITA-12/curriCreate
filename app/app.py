@@ -50,8 +50,6 @@ app.secret_key = 'selects'
 @app.route("/")
 @app.route("/index")
 def index():
-    if "selects" not in session:
-        session["selects"] = []
     df_category = pd.read_sql(
         sql='SELECT course_keyword FROM keywords;',
         con=connection
@@ -65,15 +63,13 @@ def index():
 @app.route("/index", methods=["POST"])
 def post_index():
     select_id = request.form.getlist("elem")
-    session["selects"].extend(select_id)
     df_category = pd.read_sql(
         sql='SELECT course_keyword FROM keywords;',
         con=connection
     )
     record_category = set([elem[0] for elem in df_category.values.tolist()])
     return render_template("index.html",
-                           categorys=record_category,
-                           test=session["selects"])
+                           categorys=record_category)
 
 
 @app.route("/selects", methods=["POST"])
@@ -93,8 +89,7 @@ def selects():
     record = df_curriculum.values.tolist()
     return render_template("select.html",
                            selects=select_categorys,
-                           record=record,
-                           test=session["selects"])
+                           record=record)
 
 
 if __name__ == "__main__":

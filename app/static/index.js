@@ -40,3 +40,15 @@ $('td:has(input[type=checkbox])').on('click', function(e){
 $('td input[type=checkbox]').on('click', function(e){
     e.stopPropagation();
 });
+
+// detaidl
+$(".detail").click(function(){
+    $(".detail").toggleClass("is-active")
+    $(".detail_menu").toggleClass("is-active");
+});
+$(".batsu").click(function(){
+    $(".detail").toggleClass("is-active")
+    $(".detail_menu").toggleClass("is-active");
+});
+
+

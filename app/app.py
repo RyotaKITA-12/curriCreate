@@ -76,7 +76,7 @@ def post_category():
     if "credits_now" in request.form:
         session['credits_now'] = request.form["credits_now"]
     if "grade_now" in request.form:
-        session['grade_now'] = request.form["grade_now"]
+        session['grade_now'] = str(2023-int(request.form["grade_now"]))
     select_id = request.form.getlist("elem")
     delete_id = request.form.getlist("del_elem")
     if 'select_id' not in session:

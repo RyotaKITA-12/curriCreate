@@ -25,7 +25,6 @@
             </nav>
         </header>
         <main>
-            {{ test }}
             <div>
                 <h3 class="h3">興味選択</h3>
                 <div class="container list_count">
@@ -34,7 +33,7 @@
                     {% endfor %}
                 </div>
                 <h3 class="h3">提案授業</h3>
-                <div class="table"   style="overflow-y: scroll; height: 50vh;">
+                <div class="table"   style="overflow-y: scroll; height: 45vh;">
                     <table>
                         <thead>
                             <tr>
@@ -129,8 +128,8 @@
             <button onclick="location.href='index'" type="submit" class="submit_button" style="margin-right: 80vw;">◀︎戻る</button>
         </main>
         </form>
-        <footer>
-
+        <footer class="footer">
+             <h4>{{ total }}<span>/</span>124</h4>
         </footer>
         <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
         <script src="/static/index.js" type="text/javascript"></script>

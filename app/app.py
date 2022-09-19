@@ -62,7 +62,8 @@ df_credit_required = pd.read_sql(
     sql=f"SELECT credit_required FROM curriculums WHERE credit_elective=0 AND entrance_year={ENTRANCE_YEAR}",
     con=connection
 )
-credits_required = sum([elem[0] for elem in df_credit_required.values.tolist()])
+credits_required = sum([elem[0]
+                       for elem in df_credit_required.values.tolist()])
 
 
 @app.route("/")
@@ -86,11 +87,15 @@ def index():
 @app.route("/index", methods=["POST"])
 def post_index():
     select_id = request.form.getlist("elem")
+    delete_id = request.form.getlist("del_elem")
     if 'select_id' not in session:
         session['select_id'] = []
     select_list = session['select_id']
     for i in select_id:
-        select_list.append(i)
+        if i not in select_list:
+            select_list.append(i)
+    for i in delete_id:
+        select_list.remove(i)
     session['select_id'] = select_list
     credits_total = calculate_total_credits()
     df_category = pd.read_sql(
@@ -114,10 +119,10 @@ def selects():
     sql = "SELECT * FROM curriculums"
     sql += " INNER JOIN keywords"
     sql += " ON curriculums.curriculum_id = keywords.course_id"
-    sql += f" WHERE curriculums.entrance_year = '{ENTRANCE_YEAR}' AND"
+    sql += f" WHERE curriculums.entrance_year = '{ENTRANCE_YEAR}' AND ("
     for elem in select_categorys:
         sql += f" keywords.course_keyword = '{elem}' OR"
-    sql = sql[:-3]
+    sql = sql[:-3] + ")"
     df_curriculum = pd.read_sql(
         sql=sql,
         con=connection
@@ -125,6 +130,30 @@ def selects():
     record = df_curriculum.values.tolist()
     return render_template("select.html",
                            selects=select_categorys,
+                           record=record,
+                           total=credits_total,
+                           select_list=select_list)
+
+
+@app.route("/result", methods=["POST"])
+def result():
+    if 'select_id' not in session:
+        session['select_id'] = []
+    select_list = session['select_id']
+    credits_total = calculate_total_credits()
+    sql = "SELECT * FROM curriculums"
+    sql += f" WHERE entrance_year = '{ENTRANCE_YEAR}' AND"
+    sql += " (credit_elective=0 OR ("
+    if select_list:
+        for elem in select_list:
+            sql += f" curriculum_id = '{elem}' OR"
+    sql = sql[:-3] + "))"
+    df_curriculum = pd.read_sql(
+        sql=sql,
+        con=connection
+    )
+    record = df_curriculum.values.tolist()
+    return render_template("result.html",
                            record=record,
                            total=credits_total,
                            select_list=select_list)

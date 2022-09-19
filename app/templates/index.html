@@ -10,6 +10,7 @@
     </head>
     <body>
         <header>
+            {{ select_list }}
             <div class="header_logo">
                 <img src="/static/images/logo.png" alt="" style="height: 65px;">
             </div>
@@ -26,7 +27,7 @@
         <main>
             <h3 class="h3">自分の興味分野を3つ以上選択してください</h3>
             <div class="container">
-                <form action="/selects" method="post">
+                <form method="post">
                     <div class="list_chk" style="overflow-y: scroll; height: 57vh; width: 90vw; text-align: center;">
                             {% for category in categorys %}
                             <input id="{{ category }}" class="chk" name="elem" type="checkbox" value="{{ category }}">
@@ -34,8 +35,8 @@
                             {% endfor %}
                     </div>
                     <div>
-                        <button onclick="location.href='selects'" type="submit" id='btn1' class="submit_button">履修結果 ▶︎▶︎</button>
-                        <button onclick="location.href='selects'" type="submit" id='btn1' class="submit_button">候補一覧 ▶︎</button>
+                        <button onclick="location.href='result'" formaction="/result" class="submit_button">履修結果 ▶︎▶︎</button>
+                        <button onclick="location.href='selects'" formaction="/selects" type="submit" id='btn1' class="submit_button">候補一覧 ▶︎</button>
                         <p class="text_p"></p>
                     </div>
                 </form>

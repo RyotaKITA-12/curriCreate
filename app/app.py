@@ -31,7 +31,7 @@ def get_path_db():
 
 
 def calculate_total_credits():
-    total = credits_required
+    total = credits_required + int(session["credits_now"])
     for s_id in session['select_id']:
         df_credit = pd.read_sql(
             sql='SELECT credit_required, credit_elective FROM curriculums WHERE curriculum_id = 3',
@@ -67,25 +67,16 @@ credits_required = sum([elem[0]
 
 
 @app.route("/")
-@app.route("/index")
 def index():
-    session['select_id'] = []
-    select_list = session['select_id']
-    credits_total = calculate_total_credits()
-    df_category = pd.read_sql(
-        sql='SELECT course_keyword FROM keywords;',
-        con=connection
-    )
-    record_category = set([elem[0] for elem in df_category.values.tolist()])
-    return render_template("index.html",
-                           categorys=record_category,
-                           total=credits_total,
-                           select_list=select_list)
+    return render_template("index.html")
 
 
-@app.route("/", methods=["POST"])
-@app.route("/index", methods=["POST"])
-def post_index():
+@app.route("/category", methods=["POST"])
+def post_category():
+    if "credits_now" in request.form:
+        session['credits_now'] = request.form["credits_now"]
+    if "grade_now" in request.form:
+        session['grade_now'] = request.form["grade_now"]
     select_id = request.form.getlist("elem")
     delete_id = request.form.getlist("del_elem")
     if 'select_id' not in session:
@@ -103,7 +94,7 @@ def post_index():
         con=connection
     )
     record_category = set([elem[0] for elem in df_category.values.tolist()])
-    return render_template("index.html",
+    return render_template("category.html",
                            categorys=record_category,
                            total=credits_total,
                            select_list=select_list)

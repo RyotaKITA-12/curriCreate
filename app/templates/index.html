@@ -7,45 +7,101 @@
         <link href="/static/index.css" rel="stylesheet" type="text/css">
         <link href="/static/reset.css" rel="stylesheet" type="text/css">
         <title lang="ja">test</title>
+        <style>
+            .logo img{
+                display: block;
+                padding-top: 60px;
+                margin: auto;
+                width: 23%;
+                height: 23%;
+            }
+            .logo p{
+                color: #4c2480;
+                text-align: center;
+                padding: 30px;
+            }
+            .logo span{
+                font-weight: bold;
+            }
+            .header_logo{
+                width: 100%;
+                background-color: #4c2480;
+                color: #fff;
+                text-align: center;
+                padding: 20px 0;
+                /* position: absolute;←絶対位置 */
+            }
+            .logo h3{
+                color: #4c2480;
+                text-align: center;
+                font-size: 30px;
+                font-weight: bold;
+            }
+            .button{
+                background:#4c2480;
+                padding:0.5em 0.8em;
+                text-decoration:none;
+                color:#fff;
+                font-size:1.5em;
+            }
+            .block{
+                display:block;
+                width:150px;
+                border-radius: 10px;
+            }
+            /* 入力フォーム */
+            /* デフォルトでは非表示 */
+            .form{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                margin: 20px;
+            }
+            .form p{
+                padding-bottom: 0px;
+                padding-top: 10px;
+            }
+
+        </style>
     </head>
     <body>
-        <header>
-            {{ select_list }}
-            <div class="header_logo">
-                <img src="/static/images/logo.png" alt="" style="height: 65px;">
-            </div>
-            <nav>
-                <ul>
-                    <li>
-                        <a href="index">Topに戻る</a>
-                    </li>
-                </ul>
-                <div class="burger"></div>
-                <div class="menu">サンプル</div>
-            </nav>
-        </header>
         <main>
-            <h3 class="h3">自分の興味分野を3つ以上選択してください</h3>
-            <div class="container">
-                <form method="post">
-                    <div class="list_chk" style="overflow-y: scroll; height: 57vh; width: 90vw; text-align: center;">
-                            {% for category in categorys %}
-                            <input id="{{ category }}" class="chk" name="elem" type="checkbox" value="{{ category }}">
-                            <label for="{{ category }}">{{ category }}</label>
-                            {% endfor %}
-                    </div>
-                    <div>
-                        <button onclick="location.href='result'" formaction="/result" class="submit_button">履修結果 ▶︎▶︎</button>
-                        <button onclick="location.href='selects'" formaction="/selects" type="submit" id='btn1' class="submit_button">候補一覧 ▶︎</button>
-                        <p class="text_p"></p>
-                    </div>
-                </form>
+            <div class="logo">
+                <img src="/static/images/logo.png" alt="">
+                <h3>Curry Create</h3>
+                <p>
+                    <span>自分の興味のある分野から最適な履修登録を手助けするWebアプリ</span><br><br>
+                    ・興味分野から授業を検索できる<br>
+                    ・現在の単位数、必要な単位が一眼で確認可能<br>
+                    ・４年分の履修を前もって確認できる<br><br>
+                    使い方は次のステップ<br>
+                    1.現在の単位数を入力　　　　　　　　　　　　　　　　<br>
+                    2.興味分野を選択　　　　　　　　　　　　　　　　　　<br>
+                    3.履修したものを選択する　　　　　　　　　　　　　　<br>
+                    4.これを繰り返し、４年間のカリキュラムをシュミレート<br>
+                </p>
+                <div class="form">
+                    <form action="/category" method="POST">
+                        <p style="margin-bottom: 10px;">現在の取得単位数</p>
+                        <input type="number" name="credits_now" step="1">
+                        <p style="margin-bottom: 10px;">現在の学年<br>
+                        <input type="radio" name="grade_now" value="1" style="accent-color:#97c83e">1年生
+                        <input type="radio" name="grade_now" value="2" style="accent-color:#97c83e">2年生
+                        <input type="radio" name="grade_now" value="3" style="accent-color:#97c83e">3年生
+                        <input type="radio" name="grade_now" value="4" style="accent-color:#97c83e">4年生
+                        <br><br></p>
+                        <div style="margin-right: 15%;">
+                            <button class="block button" type='submit' style="margin-top: 5vh;">start ▶︎▶</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </main>
-        <footer class="footer">
-            <h4>{{ total }}<span>/</span>124</h4>
+        <footer>
+            <p>@2022 KITA Taki Tamaru Takahashi</p>
         </footer>
         <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-        <script src="/static/index.js" type="text/javascript"></script>
+        <script src="static/index.js" type="text/javascript"></script>
     </body>
 </html>
